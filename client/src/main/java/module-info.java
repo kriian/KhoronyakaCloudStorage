@@ -7,6 +7,7 @@ module com.hehnev.client {
     exports com.hehnev.client;
     exports com.hehnev.client.io;
     opens com.hehnev.client.io to javafx.fxml;
-    exports com.hehnev.client.netty;
-    opens com.hehnev.client.netty to javafx.fxml;
+    exports com.hehnev.client.netty.controller;
+    opens com.hehnev.client.netty.controller to javafx.fxml;
+
 }
