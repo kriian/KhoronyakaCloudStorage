@@ -28,6 +28,9 @@ public class FileInfo {
     private LocalDateTime lastModified;
 
     public String getFilename() {
+        if (filename == null) {
+            System.out.println("null");
+        }
         return filename;
     }
 

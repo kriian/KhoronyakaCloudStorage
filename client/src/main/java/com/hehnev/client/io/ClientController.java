@@ -22,7 +22,6 @@ public class ClientController implements Initializable {
 
     private Client client;
     private DataInputStream dis;
-    private DataOutputStream dos;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -30,7 +29,6 @@ public class ClientController implements Initializable {
             client = new Client();
             client.showFilesName(listView, input);
             dis = client.getDis();
-            dos = client.getDos();
             Thread readThread = new Thread(() -> {
                 try {
                     while (true) {

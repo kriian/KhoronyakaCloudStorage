@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.hehnev.client.netty.controller.PanelController">
+    <HBox>
+        <ComboBox fx:id="disksBox" onAction="#selectDiskAction"/>
+        <TextField fx:id="pathField" editable="false" HBox.hgrow="ALWAYS" />
+        <Button text="UP  ⬆" onAction="#btnPathUpAction"/>
+    </HBox>
+    <TableView fx:id="filesTable" VBox.vgrow="ALWAYS" onMouseClicked="#mouseClicked"/>
+
+    <properties>
+        <ctrl><fx:reference source="controller"/></ctrl>
+    </properties>
+</VBox>
