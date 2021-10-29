@@ -1,6 +1,6 @@
 package com.hehnev.netty.server;
 
-import com.hehnev.netty.handlers.ChatMessageHandler;
+import com.hehnev.netty.handlers.MessageHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -8,10 +8,10 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.codec.serialization.ClassResolvers;
+import io.netty.handler.codec.serialization.ObjectDecoder;
+import io.netty.handler.codec.serialization.ObjectEncoder;
 import lombok.extern.slf4j.Slf4j;
-import java.nio.charset.StandardCharsets;
 
 @Slf4j
 public class Server {
@@ -39,9 +39,10 @@ public class Server {
                              * первый in ByteBuff - последний out ByteBuff
                              */
                             channel.pipeline().addLast(
-                                    new StringEncoder(StandardCharsets.UTF_8), // out-1
-                                    new StringDecoder(StandardCharsets.UTF_8), // in-1
-                                    new ChatMessageHandler() //  in-2
+                                    //десериализатор netty входящего потока байтов в объект сообщения
+                                    new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
+                                    new ObjectEncoder(), //сериализатор netty объекта сообщения в исходящии поток байтов
+                                    new MessageHandler() //  in-2
                             );
                         }
                     });
